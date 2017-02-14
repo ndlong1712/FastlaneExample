@@ -44,6 +44,11 @@ Bump build number, commit & push to remote
 fastlane ios addGitTag
 ```
 Add git tag, commit & push to remote
+### ios Pod
+```
+fastlane ios Pod
+```
+Setup cocoad pods
 ### ios beta
 ```
 fastlane ios beta

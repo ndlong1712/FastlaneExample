@@ -17,6 +17,8 @@ default_platform :ios
 
 platform :ios do
   before_all do
+    #git_pull
+    #cocoapods
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
     
     
@@ -24,7 +26,7 @@ platform :ios do
 
   desc "Runs all the tests"
   lane :test do
-    scan
+    git_pull
   end
 
   desc "Bump build number, commit & push to remote"
@@ -45,10 +47,26 @@ platform :ios do
   desc "Add git tag, commit & push to remote"
   lane :addGitTag do 
   # Alternatively, you can specify your own tag. Note that if you do specify a tag, all other arguments are ignored.
-    add_git_tag(
-     tag: "6.91"
-    )
-    push_to_git_remote
+    if !git_tag_exists(tag: "6.93")
+     add_git_tag(
+        tag: "6.93"
+     )
+
+     push_git_tags
+    end   
+    
+  end
+
+  desc "Push local changes to the remote branch"
+  lane :pushCode do 
+
+    push_to_git_remote(
+      remote: "origin",         # optional, default: "origin"
+      local_branch: "develop",  # optional, aliased by "branch", default: "master"
+      remote_branch: "develop", # optional, default is set to local_branch
+      force: false,    # optional, default: false
+      tags: true     # optional, default: true
+)
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"
@@ -100,5 +118,5 @@ end
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
 # All available actions: https://docs.fastlane.tools/actions
 
-# fastlane reports which actions are used
+# fastlane reports which actions are used mailgun
 # No personal data is recorded. Learn more at https://github.com/fastlane/enhancer
