@@ -17,11 +17,8 @@ default_platform :ios
 
 platform :ios do
   before_all do
-   ensure_git_branch(
-    branch: 'New_Branch'
-  )
-    git_pull
-    cocoapods
+   # git_pull
+   # cocoapods
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
     
     
@@ -33,10 +30,28 @@ platform :ios do
   end
 
   desc "Bump build number, commit & push to remote"
-  lane :incrementBuild do
+  lane :incrementBuildNumber do
 
     # Bump build number
     increment_build_number
+
+    # Commit and push to remote
+    commit_version_bump(
+      message: 'Build number bump by fastlane - buildnumber lane',
+      force: true
+    )
+    push_to_git_remote
+
+  end
+
+  desc "Increment the version number of your project"
+  lane :incrementVersionNumber do
+
+    # Bump build number
+    increment_version_number(
+     version_number: "2.1.1" # Set a specific version number
+    )
+
 
     # Commit and push to remote
     commit_version_bump(
@@ -64,15 +79,20 @@ platform :ios do
   lane :buildApp do 
 
     gym(
-      workspace: "MyApp.xcworkspace",
+      workspace: "Fast.xcworkspace",
       configuration: "Debug",
-      scheme: "MyApp",
+      scheme: "Fast",
       silent: true,
       clean: true,
       output_directory: "/Users/longnd9/FastlaneExample/Gym", # Destination directory. Defaults to current directory.
       output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (  including file extension)
       # sdk: "10.0"  # use SDK as the name or path of the base SDK when building the project.
-  )
+    )
+
+    install_on_device(
+     device_id: "6f841ffaa95a8b611fb823f5b52e4ff50c44d644",
+     ipa: "/Users/longnd9/FastlaneExample/Gym/my-app.ipa"
+    )
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"

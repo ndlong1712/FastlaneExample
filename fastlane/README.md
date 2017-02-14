@@ -34,11 +34,16 @@ xcode-select --install
 fastlane ios test
 ```
 Runs all the tests
-### ios incrementBuild
+### ios incrementBuildNumber
 ```
-fastlane ios incrementBuild
+fastlane ios incrementBuildNumber
 ```
 Bump build number, commit & push to remote
+### ios incrementVersionNumber
+```
+fastlane ios incrementVersionNumber
+```
+Increment the version number of your project
 ### ios addGitTag
 ```
 fastlane ios addGitTag
