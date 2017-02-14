@@ -27,15 +27,43 @@ platform :ios do
     scan
   end
 
+  desc "Bump build number, commit & push to remote"
+  lane :incrementBuild do
+
+    # Bump build number
+    increment_build_number
+
+    # Commit and push to remote
+    commit_version_bump(
+      message: 'Build number bump by fastlane - buildnumber lane',
+      force: true
+    )
+    push_to_git_remote
+
+  end
+
+  desc "Add git tag, commit & push to remote"
+  lane :addGitTag do 
+  # Alternatively, you can specify your own tag. Note that if you do specify a tag, all other arguments are ignored.
+    add_git_tag(
+     tag: "6.91"
+    )
+    push_to_git_remote
+  end
+
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
-    match(type: "appstore") # more information: https://codesigning.guide	
+  //
+  match(type: "appstore") # more information: https://codesigning.guide	
+
 	increment_build_number
+
+  add_git_tag(prefix: get_version_number + "/", build_number: get_build_number)
 	cert
-    gym(scheme: "Fast") # Build your app - more options available
+  gym(scheme: "Fast") # Build your app - more options available
 		
-    pilot(skip_waitting_for_build_processing: true)
+  pilot(skip_waitting_for_build_processing: true)
 
     # sh "your_script.sh"
     # You can also use other beta testing services here (run `fastlane actions`)
