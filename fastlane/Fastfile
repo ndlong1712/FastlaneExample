@@ -17,8 +17,11 @@ default_platform :ios
 
 platform :ios do
   before_all do
-    #git_pull
-    #cocoapods
+   ensure_git_branch(
+    branch: 'New_Branch'
+  )
+    git_pull
+    cocoapods
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
     
     
@@ -57,16 +60,19 @@ platform :ios do
     
   end
 
-  desc "Push local changes to the remote branch"
-  lane :pushCode do 
+  desc "Easily build and sign your app using gym"
+  lane :buildApp do 
 
-    push_to_git_remote(
-      remote: "origin",         # optional, default: "origin"
-      local_branch: "develop",  # optional, aliased by "branch", default: "master"
-      remote_branch: "develop", # optional, default is set to local_branch
-      force: false,    # optional, default: false
-      tags: true     # optional, default: true
-)
+    gym(
+      workspace: "MyApp.xcworkspace",
+      configuration: "Debug",
+      scheme: "MyApp",
+      silent: true,
+      clean: true,
+      output_directory: "/Users/longnd9/FastlaneExample/Gym", # Destination directory. Defaults to current directory.
+      output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (  including file extension)
+      # sdk: "10.0"  # use SDK as the name or path of the base SDK when building the project.
+  )
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"

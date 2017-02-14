@@ -44,11 +44,11 @@ Bump build number, commit & push to remote
 fastlane ios addGitTag
 ```
 Add git tag, commit & push to remote
-### ios Pod
+### ios buildApp
 ```
-fastlane ios Pod
+fastlane ios buildApp
 ```
-Setup cocoad pods
+Easily build and sign your app using gym
 ### ios beta
 ```
 fastlane ios beta
