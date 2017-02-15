@@ -77,19 +77,19 @@ platform :ios do
 
   desc "Easily build and sign your app using gym"
   lane :buildApp do 
-
+    cert
+    sigh
     gym(
       workspace: "Fast.xcworkspace",
+      export_method: "ad-hoc",
       configuration: "Debug",
       scheme: "Fast",
-      silent: true,
       clean: true,
       output_directory: "/Users/longnd9/FastlaneExample/Gym", # Destination directory. Defaults to current directory.
-      output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (  including file extension)
-      #sdk: "10.2"  # use SDK as the name or path of the base SDK when building the project.
+      output_name: "my-app.ipa"
+      #sdk: "10.0"
     )
 
-    
   end
 
   desc "Auto build .ipa into device by ios-deploy"
