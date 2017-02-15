@@ -86,12 +86,42 @@ platform :ios do
       clean: true,
       output_directory: "/Users/longnd9/FastlaneExample/Gym", # Destination directory. Defaults to current directory.
       output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (  including file extension)
-      # sdk: "10.0"  # use SDK as the name or path of the base SDK when building the project.
+      #sdk: "10.2"  # use SDK as the name or path of the base SDK when building the project.
     )
 
+    
+  end
+
+  desc "Auto build .ipa into device by ios-deploy"
+  lane :buildToDevice do
     install_on_device(
      device_id: "6f841ffaa95a8b611fb823f5b52e4ff50c44d644",
      ipa: "/Users/longnd9/FastlaneExample/Gym/my-app.ipa"
+    )
+  end
+
+  desc "Zip source"
+  lane :compressSource do
+    zip(
+     path: "/Users/longnd9/FastlaneExample",
+      output_path: "TestZip.zip",
+      verbose: false
+    )
+  end
+
+  desc "Mail"
+  lane :sendMail do
+    mailgun(
+      postmaster: "MY_POSTMASTER",
+      apikey: "MY_API_KEY",
+      to: "ndlong1712@gmail.com",
+      from: "longmindt@live.com",
+      reply_to: "EMAIL_REPLY_TO",
+      success: true,
+      message: "Mail Body",
+      app_link: "http://www.myapplink.com",
+      ci_build_link: "http://www.mycibuildlink.com",
+      template_path: "HTML_TEMPLATE_PATH",
     )
   end
 

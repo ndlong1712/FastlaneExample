@@ -54,6 +54,21 @@ Add git tag, commit & push to remote
 fastlane ios buildApp
 ```
 Easily build and sign your app using gym
+### ios buildToDevice
+```
+fastlane ios buildToDevice
+```
+Auto build .ipa into device by ios-deploy
+### ios compressSource
+```
+fastlane ios compressSource
+```
+Zip source
+### ios sendMail
+```
+fastlane ios sendMail
+```
+Mail
 ### ios beta
 ```
 fastlane ios beta

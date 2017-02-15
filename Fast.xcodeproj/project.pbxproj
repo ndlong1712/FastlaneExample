@@ -10,6 +10,8 @@
 		235A5C4017B2029D44D49D17 /* Pods_Fast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CBB5076C75B2D5C5D1B9BAF /* Pods_Fast.framework */; };
 		97434DA1DA5FD670CBAAD88B /* Pods_FastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74463A75CF46D19E583FFAC5 /* Pods_FastTests.framework */; };
 		A41B7A8EDB67D21B9FCFC91A /* Pods_FastUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0B56AFC533CB12203A06644 /* Pods_FastUITests.framework */; };
+		AC281AC61E5406DB00C9A517 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC281AC51E5406DB00C9A517 /* GameKit.framework */; };
+		AC281AC81E5406DD00C9A517 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC281AC71E5406DD00C9A517 /* StoreKit.framework */; };
 		AC3164001E49B44600F2D1CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3163FF1E49B44600F2D1CD /* AppDelegate.swift */; };
 		AC3164021E49B44700F2D1CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3164011E49B44700F2D1CD /* ViewController.swift */; };
 		AC3164051E49B44700F2D1CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC3164031E49B44700F2D1CD /* Main.storyboard */; };
@@ -43,6 +45,9 @@
 		74463A75CF46D19E583FFAC5 /* Pods_FastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75B2D2362DF71F1F5D3480E8 /* Pods-FastTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FastTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FastTests/Pods-FastTests.release.xcconfig"; sourceTree = "<group>"; };
 		99E59C2A92293FABE82D4A6B /* Pods-FastUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FastUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FastUITests/Pods-FastUITests.release.xcconfig"; sourceTree = "<group>"; };
+		AC281AC21E52FFAB00C9A517 /* Fast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fast.entitlements; sourceTree = "<group>"; };
+		AC281AC51E5406DB00C9A517 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		AC281AC71E5406DD00C9A517 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		AC3163FC1E49B44600F2D1CD /* Fast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3163FF1E49B44600F2D1CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC3164011E49B44700F2D1CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC281AC81E5406DD00C9A517 /* StoreKit.framework in Frameworks */,
+				AC281AC61E5406DB00C9A517 /* GameKit.framework in Frameworks */,
 				235A5C4017B2029D44D49D17 /* Pods_Fast.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +112,8 @@
 		921E30A65FF4A11D184F60A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AC281AC71E5406DD00C9A517 /* StoreKit.framework */,
+				AC281AC51E5406DB00C9A517 /* GameKit.framework */,
 				4CBB5076C75B2D5C5D1B9BAF /* Pods_Fast.framework */,
 				74463A75CF46D19E583FFAC5 /* Pods_FastTests.framework */,
 				E0B56AFC533CB12203A06644 /* Pods_FastUITests.framework */,
@@ -137,6 +146,7 @@
 		AC3163FE1E49B44600F2D1CD /* Fast */ = {
 			isa = PBXGroup;
 			children = (
+				AC281AC21E52FFAB00C9A517 /* Fast.entitlements */,
 				AC3163FF1E49B44600F2D1CD /* AppDelegate.swift */,
 				AC3164011E49B44700F2D1CD /* ViewController.swift */,
 				AC3164031E49B44700F2D1CD /* Main.storyboard */,
@@ -244,6 +254,17 @@
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = X385U6EXA2;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					AC31640F1E49B44700F2D1CD = {
 						CreatedOnToolsVersion = 8.2;
@@ -601,16 +622,17 @@
 			baseConfigurationReference = D337EBE8A314BE52F4D3AF18 /* Pods-Fast.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Fast/Fast.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = X385U6EXA2;
 				INFOPLIST_FILE = Fast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.test.FastLaneeee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.test.FastLane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b22d5045-e54d-4771-aed0-7f8de767eff8";
-				PROVISIONING_PROFILE_SPECIFIER = "All app";
+				PROVISIONING_PROFILE = "606a29d2-445f-4842-9a1a-250b27e5cf85";
+				PROVISIONING_PROFILE_SPECIFIER = FastLaneDemo;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -620,16 +642,17 @@
 			baseConfigurationReference = 02539A8A8784FB45082FC649 /* Pods-Fast.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Fast/Fast.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = X385U6EXA2;
 				INFOPLIST_FILE = Fast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.test.FastLaneeee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.test.FastLane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9d721ed3-b59e-449d-bb69-debcf61f1799";
-				PROVISIONING_PROFILE_SPECIFIER = adhoc_allapp;
+				PROVISIONING_PROFILE = "c28cbbc4-08e3-4fe2-9663-471cd2b71423";
+				PROVISIONING_PROFILE_SPECIFIER = FastLane_Adhoc;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
